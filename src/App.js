@@ -1,33 +1,49 @@
 import React from 'react';
+import axios from 'axios';
+import Movie from './Movie';
+import './App.css';
 
 class App extends React.Component{
   state = {
-    count: 0
+    isLoading: true,
+    movies: []
   };
 
-  add = () => {
-    this.setState(current =>({count: current.count + 1}))
-  };
-  minus = () => {
-    this.setState(current =>({count: current.count - 1}))
-  };
-
-  componentDidMount(){
-    console.log('마운트')
+  getMovies = async () => {
+    const {data: {data: { movies }}} 
+    = await axios.get('https://yts-proxy.nomadcoders1.now.sh/list_movies.json')
+    this.setState({movies, isLoading: false})
   }
-  componentDidUpdate(){
-    console.log('업데이트')
+
+  componentDidMount() {
+    this.getMovies();
   }
   
   render(){
-    console.log("렌더링")
-    return(    
-    <div>
-      <h1>숫자 매크로   :   {this.state.count}</h1> 
-      <button onClick={this.add}>더하기</button>
-      <button onClick={this.minus}>빼기</button>
+    const { isLoading, movies } = this.state;
+    return (<section className='container'>
+      {isLoading ? (
+      <div className= 'loader'>
+        <span className= 'loader__text'></span>
       </div>
-      )
+      ) : (
+      <div className= 'movies'>
+        {movies.map(movie => {
+      console.log(movie);
+      return <Movie 
+      key={movie.id} 
+      id= {movie.id} 
+      year= {movie.year} 
+      title= {movie.title} 
+      summary={movie.summary} 
+      poster= {movie.medium_cover_image}
+      genres= {movie.genres}
+      />
+    })}
+      </div>
+      )}
+      </section>
+    )
   }
 }
 
