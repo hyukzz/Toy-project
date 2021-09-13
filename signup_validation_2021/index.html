@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+
+        <h2>회원가입</h2>
+        <div class="textForm">
+        <input name="loginId" type="text" id="username" placeholder="아이디">
+        <div class="failure-message hide">아이디는 네 글자 이상이어야 합니다.</div>
+        <div class="success-message hide">사용가능한 아이디입니다.</div>
+        </input>
+        </div>
+        <div class="textForm">
+        <input name="loginPw" type="password" id="password" placeholder="비밀번호">
+        </div>
+        <div class="textForm">
+        <input name="loginPwConfirm" type="password" id="password-retype" placeholder="비밀번호 확인">
+        <div class="mismatch-message hide">비밀번호가 다릅니다.</div>
+        </div>
+        <div class="textForm">
+        <input name="name" type="text" class="name" placeholder="이름">
+        </div>
+        <div class="textForm">
+        <input name="email" type="text" class="email" placeholder="이메일">
+        </div>
+        <div class="textForm">
+        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+        </div>
+        <div class="textForm">
+        <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+        </div>
+        <input type="submit" class="btn" value="Sign Up"/>
+    </form>
+    <script src="./script.js"></script>
+    </html>
