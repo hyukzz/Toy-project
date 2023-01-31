@@ -1,14 +1,18 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const initialState = {
+const initialCounterState = {
   counter: 0,
   showCounter: true,
 };
 
-const counterSlice = createSlice({
-  name: 'counterSlice',
+const initialAuthState = {
+  isAuthenticated: false,
+};
 
-  initialState,
+const counterSlice = createSlice({
+  name: 'counter',
+
+  initialState: initialCounterState,
 
   reducers: {
     increment(state) {
@@ -16,7 +20,7 @@ const counterSlice = createSlice({
     },
 
     decrement(state) {
-      state.counter++;
+      state.counter--;
     },
 
     increase(state, action) {
@@ -26,14 +30,37 @@ const counterSlice = createSlice({
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
     },
+
+    reset(state) {
+      state.counter = 0;
+    },
+  },
+});
+
+const authSlice = createSlice({
+  name: 'auth',
+
+  initialState: initialAuthState,
+
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
   },
 });
 
 // configureStore은 여러 개의 reducer을 하나로 합칠 수 있다.
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: {
+    counter: counterSlice.reducer,
+    auth: authSlice.reducer,
+  },
 });
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 export default store;
