@@ -55,8 +55,8 @@ const authSlice = createSlice({
 // configureStore은 여러 개의 reducer을 하나로 합칠 수 있다.
 const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
-    auth: authSlice.reducer,
+    counterReducer: counterSlice.reducer,
+    authReducer: authSlice.reducer,
   },
 });
 
